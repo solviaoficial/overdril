@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OverDrill | Seul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Archivo:ital,wdth,wght@1,125,800&display=swap">
+<style>
+/* Variação 04 · Seul — institucional de grande grupo coreano.
+   Escuro e cinematográfico, seções em tela cheia, anel 3D da marca, frase que acende com a rolagem, carrossel horizontal. */
+:root{--red:#ED3237;--silver:#BDBFC1;--graphite:#383838;--void:#09090A;--deep:#121214;--card:#1B1B1E;--line:#2A2A2E;--txt:#F4F4F5;--mut:#8E8F94;
+--f:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;--wm:"Archivo","Arial Black",sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--void);color:var(--txt);font-family:var(--f);font-size:17px;line-height:1.6;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}a{color:inherit}p,h1,h2,h3,h4,ul,ol{margin:0}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.w{max-width:1320px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right))}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo svg{width:40px}
+.logo .wm{font-family:var(--wm);font-style:italic;font-weight:800;font-stretch:125%;font-size:20px;color:#fff}
+.eyebrow{font-size:14px;font-weight:700;color:var(--red);letter-spacing:.02em}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;font-family:var(--f);font-weight:700;font-size:16px;text-decoration:none;border:0;cursor:pointer;transition:transform .2s,background .2s}
+.pill:hover{transform:translateY(-2px)}
+.pill.red{background:var(--red);color:#fff}
+.pill.glass{background:rgba(255,255,255,.08);color:#fff;backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+.pill.white{background:#fff;color:var(--void)}
+
+header{position:fixed;inset:0 0 auto;z-index:40;transition:background .3s}
+header.solid{background:rgba(9,9,10,.82);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--line)}
+header .w{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+header nav{display:flex;gap:6px;background:rgba(255,255,255,.06);border-radius:999px;padding:5px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+header nav a{text-decoration:none;font-size:15px;font-weight:500;padding:8px 18px;border-radius:999px;color:#D4D4D8}
+header nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+header .pill{padding:11px 20px;font-size:15px}
+@media (max-width:960px){header nav{display:none}}
+
+/* hero */
+.hero{min-height:100svh;max-height:1100px;position:relative;display:grid;place-items:center;overflow:hidden;padding:120px 0 80px}
+.hero .glow{position:absolute;width:120vmax;height:120vmax;left:50%;top:55%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(237,50,55,.30),rgba(237,50,55,.06) 45%,transparent 70%);pointer-events:none}
+.stage{position:absolute;left:50%;top:50%;width:min(62vmin,620px);aspect-ratio:1;transform:translate(-50%,-50%);perspective:1200px;opacity:.38;filter:blur(1px)}
+.ring{position:absolute;inset:0;transform-style:preserve-3d;animation:spin 18s linear infinite}
+.ring svg{position:absolute;inset:0;width:100%;height:100%;backface-visibility:visible}
+.ring svg:nth-child(2){transform:rotateY(180deg)}
+@keyframes spin{from{transform:rotateX(18deg) rotateY(0)}to{transform:rotateX(18deg) rotateY(360deg)}}
+.hero .copy{position:relative;z-index:2;text-align:center;display:grid;gap:28px;justify-items:center}
+.hero h1{font-size:clamp(46px,8.4vw,128px);font-weight:900;line-height:1.02;letter-spacing:-.045em}
+.hero h1 span{display:block;background:linear-gradient(180deg,#fff 30%,#9A9BA0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 em{font-style:normal;color:var(--red);-webkit-text-fill-color:var(--red)}
+.hero p{font-size:clamp(17px,1.5vw,20px);color:#C8C9CD;max-width:46ch}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--mut);display:grid;justify-items:center;gap:8px;letter-spacing:.2em}
+.cue i{width:1px;height:42px;background:linear-gradient(var(--red),transparent);animation:drop 2s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (prefers-reduced-motion:reduce){.ring,.cue i{animation:none}.ring{transform:rotateX(18deg) rotateY(25deg)}}
+
+section{padding:clamp(96px,12vw,180px) 0;position:relative}
+
+/* frase que acende */
+.manifest p{font-size:clamp(30px,4.6vw,68px);font-weight:700;line-height:1.28;letter-spacing:-.035em;max-width:22ch}
+.manifest p span{color:#3A3A3F;transition:color .25s}
+.manifest p span.on{color:#fff}
+.manifest p span.r.on{color:var(--red)}
+
+/* números */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:clamp(64px,8vw,120px)}
+.stat{background:var(--card);border-radius:28px;padding:32px 28px;display:grid;gap:6px;box-shadow:inset 0 0 0 1px var(--line)}
+.stat b{font-size:clamp(44px,5vw,76px);font-weight:900;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.stat b sup{font-size:.45em;color:var(--red);vertical-align:top;margin-left:2px}
+.stat>span{color:var(--mut);font-size:15px}
+@media (max-width:860px){.stats{grid-template-columns:1fr 1fr}}
+
+/* carrossel de máquinas */
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
+.head h2{font-size:clamp(36px,5vw,72px);font-weight:900;letter-spacing:-.045em;line-height:1.06;margin-top:14px;max-width:16ch}
+.head .ctrl{display:flex;gap:10px}
+.head .ctrl button{width:56px;height:56px;border-radius:50%;border:0;background:var(--card);color:#fff;font-size:22px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.head .ctrl button:hover{background:var(--red)}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(78vw,440px);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px max(24px,env(safe-area-inset-left)) 24px;scrollbar-width:none;margin:0 auto;max-width:100%}
+.rail::-webkit-scrollbar{display:none}
+.slide{scroll-snap-align:start;border-radius:28px;overflow:hidden;background:var(--card);position:relative;min-height:540px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;box-shadow:inset 0 0 0 1px var(--line)}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.slide:hover img{transform:scale(1.05)}
+.slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,9,10,0) 30%,rgba(9,9,10,.95) 85%)}
+.slide .ph{position:absolute;inset:0;background:radial-gradient(circle at 70% 25%,rgba(237,50,55,.35),transparent 55%),linear-gradient(160deg,#26262A,#121214)}
+.slide .cnt{position:relative;z-index:1;padding:32px;display:grid;gap:12px}
+.slide .no{font-size:13px;font-weight:700;color:var(--red)}
+.slide h3{font-size:32px;font-weight:900;letter-spacing:-.04em;line-height:1.1}
+.slide p{color:#C8C9CD;font-size:15.5px}
+.slide .go{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-top:6px}
+
+/* abas de componentes */
+.comp{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:start}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chips button{font-family:var(--f);font-size:15px;font-weight:500;padding:10px 18px;border-radius:999px;border:0;background:var(--card);color:#D4D4D8;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.chips button[aria-selected="true"]{background:#fff;color:var(--void);font-weight:700}
+.view{background:var(--card);border-radius:32px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.view .pic{aspect-ratio:16/10;position:relative;background:radial-gradient(circle at 50% 40%,#2C2C31,#141416)}
+.view .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:24px}
+.view .pic .big{position:absolute;left:28px;bottom:10px;font-size:clamp(64px,9vw,120px);font-weight:900;letter-spacing:-.06em;color:rgba(255,255,255,.06);line-height:1}
+.view .bd{padding:28px;display:grid;gap:18px}
+.view h3{font-size:30px;font-weight:900;letter-spacing:-.04em}
+.view p{color:#C8C9CD}
+.models{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.models button{font-family:var(--f);text-align:left;background:var(--deep);border:0;border-radius:18px;padding:14px 16px;color:#fff;cursor:pointer;display:grid;gap:2px;box-shadow:inset 0 0 0 1px var(--line)}
+.models button b{font-size:18px;letter-spacing:-.02em}
+.models button span{font-size:12.5px;color:var(--mut)}
+.models button:hover{box-shadow:inset 0 0 0 2px var(--red)}
+@media (max-width:900px){.comp{grid-template-columns:1fr}}
+.rpm{margin-top:20px;background:var(--card);border-radius:28px;padding:24px;box-shadow:inset 0 0 0 1px var(--line)}
+.rpm .top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.rpm h4{font-size:20px;font-weight:700}
+.seg{display:flex;background:var(--deep);border-radius:999px;padding:4px}
+.seg button{font-family:var(--f);font-weight:700;font-size:14px;padding:8px 16px;border-radius:999px;border:0;background:transparent;color:var(--mut);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--red);color:#fff}
+.chart{display:flex;align-items:flex-end;gap:4px;height:160px;margin-top:22px}
+.chart i{flex:1;background:linear-gradient(180deg,var(--red),rgba(237,50,55,.25));border-radius:6px 6px 2px 2px;position:relative;min-width:0}
+.chart i:hover{background:#fff}
+.chart i span{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);font-size:11px;color:#fff;white-space:nowrap;opacity:0;font-style:normal;pointer-events:none;background:var(--void);padding:2px 6px;border-radius:6px}
+.chart i:hover span{opacity:1}
+.axis{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:8px}
+.rpm .note{font-size:13.5px;color:var(--mut);margin-top:10px}
+
+/* serviços */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.bx{background:var(--card);border-radius:28px;padding:28px;display:grid;gap:10px;align-content:start;box-shadow:inset 0 0 0 1px var(--line)}
+.bx.big{grid-column:span 2;grid-row:span 2;background:linear-gradient(150deg,#2A0E10,#121214 60%);align-content:space-between;min-height:420px}
+.bx.big h3{font-size:clamp(32px,3.6vw,52px);font-weight:900;letter-spacing:-.045em;line-height:1.08}
+.bx.big .tel{font-size:clamp(30px,3.2vw,46px);font-weight:900;letter-spacing:-.03em;user-select:all}
+.bx.big .tags{display:flex;gap:8px;flex-wrap:wrap}
+.bx.big .tags span{padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.08);font-size:13.5px}
+.bx h4{font-size:20px;font-weight:700;letter-spacing:-.02em}
+.bx p{color:var(--mut);font-size:15px}
+.bx .ic{width:44px;height:44px;border-radius:14px;background:rgba(237,50,55,.14);display:grid;place-items:center;color:var(--red);font-weight:900}
+@media (max-width:980px){.bento{grid-template-columns:1fr 1fr}.bx.big{grid-column:1/-1;grid-row:auto;min-height:0}}
+@media (max-width:520px){.bento{grid-template-columns:1fr}}
+
+/* processo */
+.track{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:20px}
+.track div{background:var(--card);border-radius:24px;padding:24px 20px;display:grid;gap:12px;align-content:start;box-shadow:inset 0 0 0 1px var(--line);position:relative}
+.track b{width:36px;height:36px;border-radius:50%;background:#fff;color:var(--void);display:grid;place-items:center;font-size:15px}
+.track div:first-child b{background:var(--red);color:#fff}
+.track h4{font-size:18px;font-weight:700}
+.track p{color:var(--mut);font-size:14px}
+@media (max-width:1000px){.track{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:520px){.track{grid-template-columns:1fr 1fr}}
+
+/* clientes marquee */
+.marq{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);margin-top:20px}
+.marq .t{display:flex;gap:56px;width:max-content;animation:mq 40s linear infinite;padding-block:12px}
+.marq span{font-size:clamp(28px,3.4vw,48px);font-weight:900;letter-spacing:-.04em;color:#3A3A3F;white-space:nowrap}
+.marq span:nth-child(3n+1){color:#6A6B70}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marq .t{animation:none;flex-wrap:wrap;width:auto}}
+
+/* empresa */
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start}
+.about .t{display:grid;gap:18px;font-size:18px;color:#C8C9CD}
+.vals{display:grid;gap:12px}
+.vals div{background:var(--card);border-radius:24px;padding:22px 24px;display:grid;grid-template-columns:100px 1fr;gap:16px;box-shadow:inset 0 0 0 1px var(--line)}
+.vals b{color:var(--red);font-size:15px}
+.vals span{color:#D4D4D8;font-size:15.5px}
+.cert{display:flex;gap:10px;flex-wrap:wrap}
+.cert span{padding:10px 16px;border-radius:999px;box-shadow:inset 0 0 0 1px #3A3A3F;font-size:14px;font-weight:500}
+@media (max-width:900px){.about{grid-template-columns:1fr}}
+
+/* contato */
+.cta{background:var(--red);border-radius:40px;padding:clamp(32px,5vw,72px);display:grid;grid-template-columns:1fr 1fr;gap:48px;color:#fff;position:relative;overflow:hidden}
+.cta::before{content:"";position:absolute;width:520px;height:520px;right:-160px;top:-200px;border-radius:50%;background:rgba(255,255,255,.08)}
+.cta h2{font-size:clamp(38px,5vw,76px);font-weight:900;letter-spacing:-.05em;line-height:1.02;position:relative}
+.cta .lines{display:grid;gap:14px;margin-top:32px;position:relative}
+.cta .lines div{display:grid;gap:0}
+.cta .lines small{font-size:13px;opacity:.8}
+.cta .lines b{font-size:24px;font-weight:700;letter-spacing:-.02em;user-select:all}
+form{background:var(--void);border-radius:28px;padding:28px;display:grid;gap:14px;position:relative}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg2 input{position:absolute;opacity:0}
+.seg2 label{display:block;text-align:center;padding:12px;border-radius:16px;background:var(--card);font-size:14.5px;font-weight:500;cursor:pointer;box-shadow:inset 0 0 0 1px var(--line)}
+.seg2 input:checked+label{background:#fff;color:var(--void);font-weight:700}
+.seg2 input:focus-visible+label{outline:2px solid var(--red)}
+.fl{display:grid;gap:6px;font-size:13px;color:var(--mut)}
+.fl input,.fl textarea{font-family:var(--f);font-size:16px;padding:14px 16px;border-radius:16px;border:0;background:var(--card);color:#fff;box-shadow:inset 0 0 0 1px var(--line);width:100%}
+.fl input:focus,.fl textarea:focus{outline:none;box-shadow:inset 0 0 0 2px var(--red)}
+.fl textarea{min-height:96px;resize:vertical}
+.gr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.msg{font-size:14px;color:#fff;background:rgba(237,50,55,.2);padding:10px 14px;border-radius:12px}
+@media (max-width:900px){.cta{grid-template-columns:1fr}.gr{grid-template-columns:1fr}}
+
+footer{padding:64px 0 48px;color:var(--mut);font-size:14px}
+footer .w{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;border-top:1px solid var(--line);padding-top:40px}
+footer h5{margin:0 0 10px;color:#fff;font-size:14px}
+footer a{text-decoration:none;display:block;padding:3px 0}
+footer a:hover{color:#fff}
+@media (max-width:760px){footer .w{grid-template-columns:1fr}}
+
+.fab{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:50;box-shadow:0 14px 40px rgba(237,50,55,.45)}
+</style>
+</head>
+<body>
+<header id="hdr"><div class="w">
+  <a class="logo" href="#top" aria-label="OverDrill"><svg viewBox="0 0 120 92" aria-hidden="true"><path fill="#ED3237" d="M64 6C30 0 4 22 4 50C4 76 30 92 54 88C34 86 20 70 22 50C24 26 42 10 64 6Z"/><path fill="#BDBFC1" d="M56 86C90 92 116 70 116 42C116 16 90 0 66 4C86 6 100 22 98 42C96 66 78 82 56 86Z"/></svg><span class="wm">OverDrill</span></a>
+  <nav><a href="#maquinas">Máquinas</a><a href="#componentes">Componentes</a><a href="#servicos">Serviços</a><a href="#empresa">Empresa</a></nav>
+  <a class="pill red" href="#contato">Fale conosco</a>
+</div></header>
+
+<main id="top">
+<div class="hero">
+  <div class="glow"></div>
+  <div class="stage" aria-hidden="true"><div class="ring">
+    <svg viewBox="-10 -14 140 120"><path fill="#ED3237" d="M64 6C30 0 4 22 4 50C4 76 30 92 54 88C34 86 20 70 22 50C24 26 42 10 64 6Z"/><path fill="#BDBFC1" d="M56 86C90 92 116 70 116 42C116 16 90 0 66 4C86 6 100 22 98 42C96 66 78 82 56 86Z"/></svg>
+    <svg viewBox="-10 -14 140 120"><path fill="#7A1A1D" d="M64 6C30 0 4 22 4 50C4 76 30 92 54 88C34 86 20 70 22 50C24 26 42 10 64 6Z"/><path fill="#5E5F61" d="M56 86C90 92 116 70 116 42C116 16 90 0 66 4C86 6 100 22 98 42C96 66 78 82 56 86Z"/></svg>
+  </div></div>
+  <div class="copy w">
+    <span class="eyebrow">Máquinas especiais · Robótica · Desde 2003</span>
+    <h1><span>Automação que</span><span><em>não para.</em></span></h1>
+    <p>Projetamos e fabricamos máquinas especiais de alta produtividade para usinagem, montagem e testes. Do projeto 3D à assistência técnica.</p>
+    <div class="acts"><a class="pill red" href="#contato">Solicitar orçamento →</a><a class="pill glass" href="#maquinas">Explorar máquinas</a></div>
+  </div>
+  <div class="cue">SCROLL<i></i></div>
+</div>
+
+<section class="manifest"><div class="w">
+  <span class="eyebrow">Quem somos</span>
+  <p id="mf" style="margin-top:24px">Há mais de vinte anos, em Diadema, transformamos o desenho de uma peça em uma máquina que produz sozinha. Furação, rosqueamento, fresagem, montagem e robótica. Tudo de forma automática e ultrarrápida.</p>
+  <div class="stats">
+    <div class="stat"><b data-n="2003">2003</b><span>ano de fundação</span></div>
+    <div class="stat"><b><span data-n="200">200</span><sup>+</sup></b><span>máquinas especiais</span></div>
+    <div class="stat"><b data-n="5">5</b><span>continentes atendidos</span></div>
+    <div class="stat"><b><span data-n="100">100</span><sup>%</sup></b><span>fabricação nacional</span></div>
+  </div>
+</div></section>
+
+<section id="maquinas" style="padding-top:0">
+  <div class="w head"><div><span class="eyebrow">Máquinas especiais</span><h2>Feitas para a sua peça.</h2></div><div class="ctrl"><button aria-label="Anterior" data-dir="-1">←</button><button aria-label="Próxima" data-dir="1">→</button></div></div>
+  <div class="rail" id="rail">
+    <a class="slide" href="#contato"><div class="ph"></div><img src="https://www.overdrill.com.br/imagens/informacoes/maquina-transfer-rotativa-01.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="cnt"><span class="no">01 · Transfer</span><h3>Transfer rotativa e CNC</h3><p>Várias estações sobre uma mesa giratória. Uma peça pronta a cada giro.</p><span class="go">Orçar →</span></div></a>
+    <a class="slide" href="#contato"><div class="ph"></div><img src="https://www.overdrill.com.br/imagens/informacoes/celula-robotizada-01.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="cnt"><span class="no">02 · Robótica</span><h3>Células robotizadas</h3><p>Alimentação de máquinas, montagem, paletização e solda.</p><span class="go">Orçar →</span></div></a>
+    <a class="slide" href="#contato"><div class="ph"></div><img src="https://www.overdrill.com.br/imagens/informacoes/maquina-rosquear-01.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="cnt"><span class="no">03 · Furar e roscar</span><h3>Furadeiras e rosqueadeiras automáticas</h3><p>De bancada ou multifuso, com a linha modular própria.</p><span class="go">Orçar →</span></div></a>
+    <a class="slide" href="#contato"><div class="ph"></div><img src="https://www.overdrill.com.br/imagens/informacoes/faceadora-centradora-01.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="cnt"><span class="no">04 · Faceamento</span><h3>Faceadora centradora</h3><p>Faceamento e centro em uma só operação.</p><span class="go">Orçar →</span></div></a>
+    <a class="slide" href="#contato"><div class="ph"></div><img src="https://www.overdrill.com.br/imagens/informacoes/fresadora-especial-01.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="cnt"><span class="no">05 · Fresagem</span><h3>Fresadoras especiais</h3><p>Dedicadas a uma família de peças, com fixação própria.</p><span class="go">Orçar →</span></div></a>
+    <a class="slide" href="#contato"><div class="ph"></div><img src="https://www.overdrill.com.br/imagens/informacoes/centro-usinagem-especial-01.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="cnt"><span class="no">06 · Sujeição</span><h3>Dispositivos para centros de usinagem</h3><p>Repetibilidade peça após peça em grandes linhas.</p><span class="go">Orçar →</span></div></a>
+  </div>
+</section>
+
+<section id="componentes" style="padding-top:0"><div class="w">
+  <div class="comp">
+    <div>
+      <span class="eyebrow">Linha modular</span>
+      <h2 style="font-size:clamp(36px,5vw,72px);font-weight:900;letter-spacing:-.045em;line-height:1.06;margin-top:14px">Componentes de catálogo.</h2>
+      <p style="color:#C8C9CD;margin-top:18px;max-width:44ch">A mesma linha que vai dentro das nossas máquinas, à venda para quem monta ou moderniza a própria.</p>
+      <div class="chips" role="tablist" id="chips"></div>
+      <div class="rpm">
+        <div class="top"><h4>Rotação final por combinação de polias</h4><div class="seg" role="group" aria-label="Família"><button data-f="T5" aria-pressed="true">T5</button><button data-f="T10" aria-pressed="false">T10</button><button data-f="T15" aria-pressed="false">T15</button></div></div>
+        <div class="chart" id="chart" aria-label="24 rotações de 1.061 a 8.028 RPM"></div>
+        <div class="axis"><span>1.061 RPM</span><span>8.028 RPM</span></div>
+        <p class="note" id="kw">Família T5 · motor 0,25 kW · 24 combinações de polia</p>
+      </div>
+    </div>
+    <div class="view" id="view"></div>
+  </div>
+</div></section>
+
+<section id="servicos" style="padding-top:0"><div class="w">
+  <div class="head"><div><span class="eyebrow">Serviços</span><h2>Sua linha não pode parar.</h2></div></div>
+  <div class="bento">
+    <div class="bx big"><div style="display:grid;gap:14px"><span class="eyebrow">Assistência técnica</span><h3>Corretiva, preventiva e preditiva. Em todo o Brasil.</h3><div class="tags"><span>Mecânica</span><span>Hidráulica</span><span>Elétrica</span><span>Programação</span></div></div><div style="display:grid;gap:4px"><span style="color:var(--mut);font-size:14px">Abrir chamado</span><span class="tel">(11) 4055-4152</span><span style="user-select:all;color:#D4D4D8">assistenciatecnica@overdrill.com.br</span></div></div>
+    <div class="bx"><span class="ic">R</span><h4>Retrofitting</h4><p>Máquinas nacionais e importadas, de qualquer fabricante.</p></div>
+    <div class="bx"><span class="ic">12</span><h4>Adequação à NR-12</h4><p>Segurança e ergonomia em máquinas instaladas.</p></div>
+    <div class="bx"><span class="ic">↻</span><h4>Readaptação e realocação</h4><p>Linhas desativadas reaproveitadas, na mesma planta ou entre países.</p></div>
+    <div class="bx"><span class="ic">{ }</span><h4>Reprogramação de CLP</h4><p>Máquinas especiais novas e usadas, reforma de dispositivos.</p></div>
+  </div>
+  <div class="track">
+    <div><b>1</b><h4>Briefing</h4><p>Desenho, operações e volume.</p></div>
+    <div><b>2</b><h4>Projeto 3D</h4><p>A máquina inteira modelada.</p></div>
+    <div><b>3</b><h4>Aprovação</h4><p>Com a sua engenharia.</p></div>
+    <div><b>4</b><h4>Fabricação</h4><p>100% nacional.</p></div>
+    <div><b>5</b><h4>Instalação</h4><p>Partida na sua fábrica.</p></div>
+    <div><b>6</b><h4>Assistência</h4><p>Suporte permanente.</p></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="w"><span class="eyebrow">Clientes</span></div>
+  <div class="marq"><div class="t"><span>Honda</span><span>Bosch</span><span>Scania</span><span>Volkswagen</span><span>Mercedes-Benz</span><span>ZF</span><span>Cummins</span><span>Continental</span><span>Dana</span><span>Valeo</span><span>Liebherr</span><span>Delphi</span><span>MWM</span><span>Magneti Marelli</span><span>Schneider</span><span>Romi</span><span>Autometal</span><span>Daisa</span><span>Corneta</span><span>Aliança</span><span>Honda</span><span>Bosch</span><span>Scania</span><span>Volkswagen</span><span>Mercedes-Benz</span><span>ZF</span><span>Cummins</span><span>Continental</span><span>Dana</span><span>Valeo</span><span>Liebherr</span><span>Delphi</span><span>MWM</span><span>Magneti Marelli</span><span>Schneider</span><span>Romi</span><span>Autometal</span><span>Daisa</span><span>Corneta</span><span>Aliança</span></div></div>
+</section>
+
+<section id="empresa" style="padding-top:0"><div class="w">
+  <div class="about">
+    <div><span class="eyebrow">Empresa</span><h2 style="font-size:clamp(36px,5vw,72px);font-weight:900;letter-spacing:-.045em;line-height:1.06;margin:14px 0 28px">Engenharia brasileira, mercado global.</h2>
+      <div class="t"><p>A OverDrill constrói máquinas especiais de alta produtividade e sistemas robóticos de manipulação, paletização e soldagem.</p><p>A linha modularizada de furadeiras, rosqueadeiras e componentes normalizados torna a automação da usinagem viável. Clientes na América Latina, nos EUA, na Ásia, na África e na Europa.</p></div>
+      <div class="cert" style="margin-top:28px"><span>ISO 9001</span><span>Prêmio GLP 2013</span><span>Dun &amp; Bradstreet</span></div>
+    </div>
+    <div class="vals"><div><b>Visão</b><span>Produtos e serviços inovadores, robustos e seguros, com excelência em qualidade e confiabilidade.</span></div><div><b>Missão</b><span>Qualificar colaboradores, superar expectativas, negócios rentáveis e parcerias sólidas.</span></div><div><b>Valores</b><span>Responsabilidade, renovação e respeito.</span></div><div><b>Qualidade</b><span>Entrega no prazo, menos perdas e melhoria contínua.</span></div></div>
+  </div>
+</div></section>
+
+<section id="contato" style="padding-top:0"><div class="w">
+  <div class="cta">
+    <div><h2>Vamos automatizar a sua produção.</h2>
+      <div class="lines"><div><small>Comercial</small><b>(11) 4044-6300</b></div><div><small>Assistência técnica</small><b>(11) 4055-4152</b></div><div><small>E-mail</small><b>overdrill@overdrill.com.br</b></div><div><small>Fábrica</small><b style="font-size:18px">Av. Marginal, 134 · Diadema-SP</b></div></div></div>
+    <form id="form" novalidate>
+      <div class="seg2"><input type="radio" name="n" id="k1" value="Máquina especial" checked><label for="k1">Máquina especial</label><input type="radio" name="n" id="k2" value="Componente"><label for="k2">Componente</label><input type="radio" name="n" id="k3" value="Serviço"><label for="k3">Serviço</label><input type="radio" name="n" id="k4" value="Carreiras"><label for="k4">Carreiras</label></div>
+      <label class="fl" for="tx">O que você precisa produzir?<textarea id="tx" placeholder="Peça, operações e volume mensal"></textarea></label>
+      <div class="gr"><label class="fl" for="b1">Nome *<input id="b1" autocomplete="name"></label><label class="fl" for="b2">Empresa<input id="b2" autocomplete="organization"></label></div>
+      <div class="gr"><label class="fl" for="b3">E-mail *<input id="b3" type="email" autocomplete="email"></label><label class="fl" for="b4">Telefone *<input id="b4" type="tel" autocomplete="tel"></label></div>
+      <button class="pill white" type="submit" style="justify-content:center">Enviar pedido →</button>
+      <p class="msg" id="msg" hidden></p>
+    </form>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="w">
+  <div><a class="logo" href="#top" aria-label="OverDrill"><svg viewBox="0 0 120 92" aria-hidden="true"><path fill="#ED3237" d="M64 6C30 0 4 22 4 50C4 76 30 92 54 88C34 86 20 70 22 50C24 26 42 10 64 6Z"/><path fill="#BDBFC1" d="M56 86C90 92 116 70 116 42C116 16 90 0 66 4C86 6 100 22 98 42C96 66 78 82 56 86Z"/></svg><span class="wm">OverDrill</span></a><p style="margin-top:14px">OverDrill Indústria e Comércio de Máquinas e Equipamentos Ltda.<br>Av. Marginal, 134 – Conceição, Diadema-SP, 09980-390</p></div>
+  <div><h5>Explorar</h5><a href="#maquinas">Máquinas</a><a href="#componentes">Componentes</a><a href="#servicos">Serviços</a><a href="#empresa">Empresa</a></div>
+  <div><h5>Canais</h5><a href="http://www.youtube.com/user/OverDrill1">YouTube</a><a href="https://www.facebook.com/OverDrill-234246736690070">Facebook</a><span>(11) 4044-6300</span></div>
+</div></footer>
+<a class="pill red fab" href="#contato">Orçamento</a>
+
+<script>
+(function(){
+var hdr=document.getElementById("hdr");function sh(){hdr.classList.toggle("solid",scrollY>40)}addEventListener("scroll",sh,{passive:true});sh();
+// frase que acende
+var mf=document.getElementById("mf"),words=mf.textContent.split(" ");mf.innerHTML=words.map(function(w){var r=/automática|ultrarrápida\.|sozinha\./.test(w);return"<span"+(r?" class='r'":"")+">"+w+"</span>"}).join(" ");
+var spans=mf.querySelectorAll("span");
+function light(){var r=mf.getBoundingClientRect(),vh=innerHeight,p=(vh*.85-r.top)/(r.height+vh*.35);p=Math.max(0,Math.min(1,p));var n=Math.round(p*spans.length);spans.forEach(function(s,i){s.classList.toggle("on",i<n)})}
+if(matchMedia("(prefers-reduced-motion: reduce)").matches){spans.forEach(function(s){s.classList.add("on")})}else{addEventListener("scroll",light,{passive:true});light()}
+// carrossel
+var rail=document.getElementById("rail");document.querySelectorAll("[data-dir]").forEach(function(b){b.onclick=function(){rail.scrollBy({left:+b.dataset.dir*(rail.firstElementChild.offsetWidth+18),behavior:"smooth"})}});
+// componentes
+var C=[["Unidades de furar","FT","rosqueadeira-rt5-85sv-01.jpg","Furação autônoma nas famílias T5, T10 e T15.",[["FT5-100SV","Família T5"],["FT5-63SV","Família T5"],["FT5-100","Família T5"],["FT5-63","Família T5"],["T10","Motor 0,55 kW"],["T15","Motor 1,10 kW"]]],
+["Unidades de roscar","RT","rosqueadeira-rt5-85-01.jpg","Rosqueamento automático para rosqueadeiras elétricas e de bancada.",[["RT5-85","Família T5"],["RT5-85SV","Família T5"],["T10","Motor 0,55 kW"],["T15","Motor 1,10 kW"]]],
+["Cabeçotes múltiplos","CM","cabecote-t52-01.jpg","Vários furos ou roscas no mesmo ciclo.",[["T5","Regulável"],["T10","Regulável"],["T15","Regulável"]]],
+["Fusos","UT","fuso-usinagem-ut50-01.jpg","Fresagem, mandrilamento, torneamento e acabamento fino.",[["UT50","Fuso de usinagem"]]],
+["Avanço","AT","unidade-avanco-at30-250sv-01.jpg","Curso e velocidade controlados até a peça.",[["AT30","Unidade de avanço"],["AT40","Unidade de avanço"]]],
+["Mesas giratórias","GT","mesa-giratoria-gt160-01.jpg","Para transfers rotativas e solda.",[["GT160","Linha leve"],["Pesada","Linha pesada"]]],
+["Sujeição","SJ","porta-pincas-automatico-01.jpg","Fixação para centros de usinagem.",[["Porta-pinças","Automático"],["Morsa","Autocentrante"]]]];
+var chips=document.getElementById("chips"),view=document.getElementById("view");
+function e(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function show(i){[].forEach.call(chips.children,function(b,j){b.setAttribute("aria-selected",j===i)});var c=C[i];view.innerHTML="<div class='pic'><span class='big'>"+c[1]+"</span><img src='https://www.overdrill.com.br/imagens/produtos/"+c[2]+"' alt='"+e(c[0])+"' onerror='this.remove()'></div><div class='bd'><h3>"+e(c[0])+"</h3><p>"+e(c[3])+"</p><div class='models'>"+c[4].map(function(m){return"<button type='button' data-m='"+e(c[0]+" · "+m[0])+"'><b>"+e(m[0])+"</b><span>"+e(m[1])+" · Cotar →</span></button>"}).join("")+"</div></div>"}
+C.forEach(function(c,i){var b=document.createElement("button");b.setAttribute("role","tab");b.textContent=c[0];b.onclick=function(){show(i)};chips.appendChild(b)});show(0);
+var R=[1061,1120,1307,1384,1581,1680,1785,2040,2230,2602,2755,3148,3345,3554,4062,4301,5018,5296,6021,6356,6690,7025,7359,8028],K={T5:"0,25",T10:"0,55",T15:"1,10"};
+document.getElementById("chart").innerHTML=R.map(function(r){return"<i style='height:"+(r/8028*100)+"%'><span>"+r.toLocaleString("pt-BR")+" RPM</span></i>"}).join("");
+document.querySelectorAll(".seg button").forEach(function(b){b.onclick=function(){document.querySelectorAll(".seg button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});document.getElementById("kw").textContent="Família "+b.dataset.f+" · motor "+K[b.dataset.f]+" kW · 24 combinações de polia"}});
+// contadores
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;var el=en.target,to=+el.dataset.n,from=to>1000?1990:0,t0=performance.now();io.unobserve(el);(function step(t){var p=Math.min(1,(t-t0)/1200);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step)})(t0)})},{threshold:.6});
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.querySelectorAll("[data-n]").forEach(function(el){io.observe(el)});
+// formulário
+var tx=document.getElementById("tx");
+document.addEventListener("click",function(ev){var m=ev.target.closest("[data-m]");if(m){document.getElementById("k2").checked=true;tx.value="Cotação: "+m.dataset.m+"\nQuantidade: ";location.hash="contato";setTimeout(function(){tx.focus()},300)}});
+document.getElementById("form").onsubmit=function(ev){ev.preventDefault();var g=document.getElementById("msg"),miss=[];if(!document.getElementById("b1").value.trim())miss.push("nome");if(!/\S+@\S+\.\S+/.test(document.getElementById("b3").value))miss.push("e-mail");if(document.getElementById("b4").value.replace(/\D/g,"").length<10)miss.push("telefone com DDD");g.hidden=false;g.textContent=miss.length?"Preencha: "+miss.join(", ")+".":"Pedido pronto. No site publicado ele segue para a equipe da OverDrill."};
+})();
+</script>
+</body>
+</html>
